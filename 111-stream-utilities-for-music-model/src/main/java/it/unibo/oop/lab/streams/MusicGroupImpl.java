@@ -87,6 +87,7 @@ public final class MusicGroupImpl implements MusicGroup {
             .collect(Collectors.groupingBy(Song::getAlbumName, Collectors.summingDouble(Song::getDuration)))
             .entrySet()
             .stream()
+            .filter(e -> e.getKey().isPresent())
             .max((e1, e2) -> e1.getValue().compareTo(e2.getValue()))
             .map(Map.Entry::getKey)
             .get(); // TODO se possibile togliere il get()
